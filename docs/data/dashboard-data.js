@@ -1,6 +1,7 @@
 window.DASHBOARD_DATA = {
   project: {
-    title: "Adversarial Robustness in Neural Networks",
+title: "Evaluating and Improving Adversarial Robustness",
+    author: "FATIMA LAMGHARI",
     subtitle: "A master’s-style research project with a GitHub-ready interactive dashboard",
     dataset: "Executed locally on the scikit-learn digits benchmark (1,797 samples, 10 classes, 8 x 8 grayscale images)",
     note: "Executed results come from the local handwritten-digit proxy. MNIST and CIFAR-10 are included as an extension protocol, not as completed local runs."
