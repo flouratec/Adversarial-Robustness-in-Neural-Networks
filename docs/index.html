@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adversarial Robustness Dashboard</title>
+  <meta name="description" content="Interactive GitHub Pages dashboard for an adversarial robustness research project.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js" defer></script>
+  <script src="./data/dashboard-data.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Graduate Research Dashboard</span>
+        <h1 id="project-title">Adversarial Robustness in Neural Networks</h1>
+        <p id="project-subtitle" class="hero-subtitle"></p>
+        <p id="project-note" class="hero-note"></p>
+        <div class="hero-actions" id="download-links"></div>
+      </div>
+      <div class="hero-visual">
+        <img src="./assets/hero_montage.png" alt="Project montage showing experiment visuals">
+      </div>
+    </header>
+
+    <section class="kpi-grid" aria-label="Headline metrics">
+      <article class="kpi-card accent-clean">
+        <p class="kpi-label">Clean baseline</p>
+        <h2 id="kpi-clean-baseline">96.67%</h2>
+        <p class="kpi-foot">Strong natural accuracy</p>
+      </article>
+      <article class="kpi-card accent-pgd">
+        <p class="kpi-label">Baseline under PGD</p>
+        <h2 id="kpi-pgd-baseline">0.28%</h2>
+        <p class="kpi-foot">Near-total collapse</p>
+      </article>
+      <article class="kpi-card accent-robust">
+        <p class="kpi-label">PGD after defense</p>
+        <h2 id="kpi-pgd-robust">30.28%</h2>
+        <p class="kpi-foot">Material robustness recovery</p>
+      </article>
+      <article class="kpi-card accent-gain">
+        <p class="kpi-label">PGD gain</p>
+        <h2 id="kpi-pgd-gain">+30.00 pp</h2>
+        <p class="kpi-foot">Defense benefit</p>
+      </article>
+    </section>
+
+    <section class="panel-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-label">Interactive selector</p>
+            <h3>Scenario lab</h3>
+          </div>
+        </div>
+        <div class="controls-row">
+          <label>
+            Model
+            <select id="model-select">
+              <option value="baseline">Baseline model</option>
+              <option value="robust">Adversarially trained model</option>
+            </select>
+          </label>
+          <label>
+            Evaluation setting
+            <select id="attack-select">
+              <option value="clean">Clean</option>
+              <option value="fgsm">FGSM</option>
+              <option value="pgd">PGD</option>
+            </select>
+          </label>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-metric">
+            <span>Accuracy</span>
+            <strong id="scenario-accuracy">96.67%</strong>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-track">
+              <div id="scenario-bar" class="progress-fill"></div>
+            </div>
+          </div>
+          <p id="scenario-message" class="scenario-message"></p>
+        </div>
+        <div class="mini-stats">
+          <div>
+            <span>Drop from clean</span>
+            <strong id="scenario-drop">0.00 pp</strong>
+          </div>
+          <div>
+            <span>Macro-F1</span>
+            <strong id="scenario-f1">0.9665</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel chart-panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-label">Comparison</p>
+            <h3>Baseline vs defense</h3>
+          </div>
+        </div>
+        <canvas id="comparisonChart" aria-label="Comparison chart"></canvas>
+      </article>
+    </section>
+
+    <section class="panel gallery-panel">
+      <div class="panel-head gallery-head">
+        <div>
+          <p class="section-label">Visual evidence</p>
+          <h3>Figure gallery</h3>
+        </div>
+        <div class="gallery-tabs" id="gallery-tabs"></div>
+      </div>
+      <div class="gallery-stage">
+        <img id="gallery-image" src="./assets/attack_impact.png" alt="Experiment figure preview">
+      </div>
+      <p id="gallery-caption" class="gallery-caption"></p>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-label">Key findings</p>
+            <h3>What this project proves</h3>
+          </div>
+        </div>
+        <ul id="key-findings" class="findings-list"></ul>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-label">Reproducibility</p>
+            <h3>Research note</h3>
+          </div>
+        </div>
+        <p id="dataset-line" class="dataset-line"></p>
+        <p class="repro-note">This dashboard separates executed local evidence from planned benchmark extensions. That keeps the project honest, academically clean, and easy to defend.</p>
+      </article>
+    </section>
+  </div>
+</body>
+</html>
