@@ -1,0 +1,30 @@
+{
+  "clean_accuracy": 96.67,
+  "clean_macro_f1": 0.9665,
+  "attack_results": [
+    {
+      "name": "FGSM-proxy",
+      "accuracy": 58.89,
+      "attack_success_rate": 41.11,
+      "mean_confidence_drop": 0.2143,
+      "mean_input_shift": 0.0712
+    },
+    {
+      "name": "PGD-proxy",
+      "accuracy": 30.28,
+      "attack_success_rate": 69.72,
+      "mean_confidence_drop": 0.4386,
+      "mean_input_shift": 0.1184
+    }
+  ],
+  "detection": {
+    "suspicious_ratio": 67.5,
+    "avg_margin_drop": 0.1934,
+    "avg_entropy_change": 0.2871,
+    "avg_prediction_flip_rate": 69.72,
+    "risk_level": "High"
+  },
+  "protection_score": 53.41,
+  "protection_level": "Weak",
+  "summary": "The model achieves 96.67% clean accuracy. Under attack pressure, its average robust accuracy is 44.59%. The detection module reports High attack risk, and the final protection assessment is Weak with a score of 53.41/100."
+}
