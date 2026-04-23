@@ -143,6 +143,66 @@ function renderChart(metrics) {
             label: (context) => `${context.dataset.label}: ${context.parsed.y.toFixed(2)}%`
           }
         }
+        async function loadRobustGuardReport() {
+  try {
+    const response = await fetch("./data/robust-guard-report.json");
+    if (!response.ok) throw new Error("Report not found");
+
+    const report = await response.json();
+
+    document.getElementById("guard-protection-level").textContent =
+      report.protection_level || "--";
+
+    document.getElementById("guard-protection-score").textContent =
+      report.protection_score != null ? `${report.protection_score}/100` : "--";
+
+    document.getElementById("guard-risk-level").textContent =
+      report.detection?.risk_level || "--";
+
+    document.getElementById("guard-suspicious-ratio").textContent =
+      report.detection?.suspicious_ratio != null
+        ? `${report.detection.suspicious_ratio}%`
+        : "--";
+
+    document.getElementById("guard-summary-text").textContent =
+      report.summary || "No summary available.";
+
+    const attackBox = document.getElementById("guard-attack-results");
+    attackBox.innerHTML = "";
+
+    (report.attack_results || []).forEach((attack) => {
+      const row = document.createElement("div");
+      row.className = "attack-row";
+      row.innerHTML = `
+        <div>
+          <strong>${attack.name}</strong>
+          <span>Attack evaluation</span>
+        </div>
+        <div>
+          <strong>Accuracy</strong>
+          <span>${attack.accuracy}%</span>
+        </div>
+        <div>
+          <strong>Success Rate</strong>
+          <span>${attack.attack_success_rate}%</span>
+        </div>
+        <div>
+          <strong>Confidence Drop</strong>
+          <span>${attack.mean_confidence_drop}</span>
+        </div>
+      `;
+      attackBox.appendChild(row);
+    });
+  } catch (error) {
+    const summary = document.getElementById("guard-summary-text");
+    if (summary) {
+      summary.textContent =
+        "Robust Guard report is not available yet. Run the Python system first.";
+    }
+  }
+}
+
+loadRobustGuardReport();
       },
       scales: {
         x: {
