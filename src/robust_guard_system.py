@@ -268,7 +268,7 @@ if __name__ == "__main__":
     # Analyze robustness
     system = RobustGuardSystem(model)
     report = system.analyze(X_test, y_test)
-    system.export_json(report)
+    system.export_json(report, "../docs/data/robust-guard-report.json")
 
     print("\n=== Robust Guard Report ===")
     print(report.summary)
