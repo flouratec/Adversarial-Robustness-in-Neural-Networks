@@ -246,3 +246,30 @@ function init() {
 }
 
 window.addEventListener("DOMContentLoaded", init);
+async function loadRobustGuardReport() {
+  try {
+    const response = await fetch("./data/robust-guard-report.json");
+    const report = await response.json();
+
+    document.getElementById("guard-protection-level").textContent =
+      report.protection_level;
+
+    document.getElementById("guard-protection-score").textContent =
+      report.protection_score + "/100";
+
+    document.getElementById("guard-risk-level").textContent =
+      report.detection.risk_level;
+
+    document.getElementById("guard-suspicious-ratio").textContent =
+      report.detection.suspicious_ratio + "%";
+
+    document.getElementById("guard-summary-text").textContent =
+      report.summary;
+
+  } catch (e) {
+    document.getElementById("guard-summary-text").textContent =
+      "Error loading intelligent system.";
+  }
+}
+
+loadRobustGuardReport();
