@@ -352,3 +352,52 @@ select {
     font-size: 2.1rem;
   }
 }
+.guard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.guard-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.big-number {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.guard-summary,
+.guard-attacks {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.attack-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.attack-row:last-child {
+  border-bottom: none;
+}
+
+.attack-row strong {
+  display: block;
+  margin-bottom: 4px;
+}
